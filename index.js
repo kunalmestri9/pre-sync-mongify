@@ -42,7 +42,7 @@ function init(){
 	connection.query('show tables', function(err, rows, fields) {
 	  if (err) throw err;
 	    async.eachSeries(rows,function (ob, next){ 
-			var tableName=ob["Tables_in_allana"];
+			var tableName=ob["Tables_in_"+_databaseConfig.database];
 	 		console.log("Table Name : " + tableName);
 	 		checkIfAlteringIsRequired(tableName,function(){
 	 			console.log("-----------------------------------------------------------");
