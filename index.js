@@ -1,12 +1,24 @@
+#! /usr/bin/env node
+
 var mysql      = require('mysql');
 var async	   = require('async');
+var argv 	   = require('minimist')(process.argv.slice(2));
+
+
+
+//console.dir(argv);
+
+if(typeof(argv.server)=="undefined" || typeof(argv.username)=="undefined"  || typeof(argv.password)=="undefined" || typeof(argv.database)=="undefined" ){
+	throw  "Missing Mandatory parameter.  Kindly check the documentation at https://github.com/kunalmestri9/pre-sync-mongify";
+}
+
 
 
 var _databaseConfig={
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'dbName'
+  host     : argv.server,
+  user     : argv.username,
+  password : argv.password,
+  database : argv.database
 }
 
 var connection = mysql.createConnection(_databaseConfig);

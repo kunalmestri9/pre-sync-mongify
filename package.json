@@ -1,19 +1,27 @@
 {
   "name": "pre-sync-mongify",
   "version": "1.0.0",
-  "description": "this will help mongify sync command to get ready all the pre requirement that your mysql db should have. By setting up few triggers and altering some columns.  ",
+  "description": "This will help mongify sync command to get ready all the pre requirement that your mysql db should have. By setting up few triggers and altering some columns.  ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "\"https://github.com/kunalmestri9/pre-sync-mongify\""
   },
   "keywords": [
     "mongify-sync",
     "prerequisites"
   ],
+  "bin": {
+    "pre-sync-mongify": "index.js"
+  },
   "author": "kunal mestri",
   "license": "MIT",
   "dependencies": {
     "async": "^2.1.4",
+    "minimist": "^1.2.0",
     "mysql": "^2.12.0"
   }
 }
