@@ -1,6 +1,6 @@
 {
   "name": "pre-sync-mongify",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This will help mongify sync command to get ready all the pre requirement that your mysql db should have. By setting up few triggers and altering some columns.  ",
   "main": "index.js",
   "scripts": {
