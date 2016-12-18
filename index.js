@@ -49,8 +49,7 @@ function init(){
 	 			next();
 	 			
 	 		});
-	     		
-		},function(){
+	    },function(){
 			console.log("Completed required changes to database. Go ahead and execute : ");
 			console.log("mongify sync database.config database_translation.rb");
 			console.log("For more information visit : https://github.com/anlek/mongify#sync-note");
@@ -81,10 +80,9 @@ function checkIfAlteringIsRequired(tableName,callback){
 	
 	
 }
-
+/*
 function alterTableForUpdatedAt(tableName,callback){
 	var alterQuery="ALTER TABLE " + tableName + " ADD COLUMN updated_at DATETIME DEFAULT NOW()";
-	console.log(alterQuery);
 	connection.query(alterQuery, function(err, rows, fields) {
 		if (err) {
 		    console.log(err);
@@ -94,6 +92,28 @@ function alterTableForUpdatedAt(tableName,callback){
 		}	
 	});
 }
+
+*/
+
+function alterTableForUpdatedAt(tableName,callback){
+	var updateTrigger="CREATE TRIGGER " + tableName + "_up_trigger BEFORE UPDATE on " + tableName + " FOR EACH ROW SET NEW.updated_at=NOW()";
+	var alterQuery="ALTER TABLE " + tableName + " ADD COLUMN updated_at DATETIME DEFAULT NOW()";
+	async.eachSeries([alterQuery,updateTrigger],function (ob, next){
+		connection.query(ob, function(err, rows, fields) {
+			console.log(ob);
+			if (err) {
+			    console.log(err);
+			}else{
+				console.log("Altering completed all set to go");
+			}	
+			next();
+		});
+    },function(){
+		callback();
+	});
+	
+}
+
 
 
 
