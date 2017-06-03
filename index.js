@@ -97,8 +97,9 @@ function alterTableForUpdatedAt(tableName,callback){
 
 function alterTableForUpdatedAt(tableName,callback){
 	var updateTrigger="CREATE TRIGGER " + tableName + "_up_trigger BEFORE UPDATE on " + tableName + " FOR EACH ROW SET NEW.updated_at=NOW()";
-	var alterQuery="ALTER TABLE " + tableName + " ADD COLUMN updated_at DATETIME DEFAULT NOW()";
-	async.eachSeries([alterQuery,updateTrigger],function (ob, next){
+	var alterQuery="ALTER TABLE " + tableName + " ADD COLUMN updated_at TIMESTAMP DEFAULT NOW()";
+        var updateQuery="UPDATE " + tableName + " SET updated_at=NOW()";	
+async.eachSeries([alterQuery,updateTrigger,updateQuery],function (ob, next){
 		connection.query(ob, function(err, rows, fields) {
 			console.log(ob);
 			if (err) {
@@ -113,7 +114,3 @@ function alterTableForUpdatedAt(tableName,callback){
 	});
 	
 }
-
-
-
-
