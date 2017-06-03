@@ -1,5 +1,6 @@
 # pre-sync-mongify
-This module is useful for migrating your database from mongo to 
+This will help mongify sync command to get ready all the pre requirement that your mysql db should have. By setting up few triggers and altering some columns.
+This module is useful for migrating your database from Mysql to Mongo in Sync Mode 
 
 
 Usage:
